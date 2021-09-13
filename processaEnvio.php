@@ -59,11 +59,11 @@ try {
 
     //Recipients
     $mail->setFrom('from@example.com', 'Mailer');
-    $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient
+    $mail->addAddress($mensagem -> __get('para'));     //Add a recipient
     $mail->addAddress('ellen@example.com');               //Name is optional
-    $mail->addReplyTo('info@example.com', 'Information');
-    $mail->addCC('cc@example.com');
-    $mail->addBCC('bcc@example.com');
+    //$mail->addReplyTo('info@example.com', 'Information');
+    //$mail->addCC('cc@example.com');
+    //$mail->addBCC('bcc@example.com');
 
     //Attachments
     $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
@@ -71,12 +71,12 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Subject = $mensagem -> __get('assunto');
+    $mail->Body    = $mensagem -> __get('mensagem');
+    $mail->AltBody = 'Necessário usar um client com suporte HTML';
 
     $mail->send();
-    echo 'Message has been sent';
+    echo 'Email enviado com sucesso';
 } catch (Exception $e) {
     echo "Não foi possível enviar o email. Erro: {$mail->ErrorInfo}";
 }
